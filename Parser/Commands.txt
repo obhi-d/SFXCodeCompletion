@@ -1,0 +1,7 @@
+Macro
+VertexInput
+FragmentOutput
+Parameter
+Buffer
+Member
+Pass
