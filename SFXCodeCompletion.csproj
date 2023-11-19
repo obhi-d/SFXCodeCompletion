@@ -51,8 +51,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classification\ClassificationFormat.cs" />
-    <Compile Include="Classification\ClassificationTypes.cs" />
+    <None Include="Classification\ClassificationTypes.t4" />
+    <Compile Include="Classification\ClassificationTypes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassificationTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Classification\Classifier.cs" />
     <Compile Include="Classification\SyntaxColorParser.cs" />
     <Compile Include="CodeCompletion\CompletionController.cs" />
@@ -66,8 +70,6 @@
     </Compile>
     <Compile Include="Parser\KnownTokens.cs" />
     <Compile Include="Parser\Lexer.cs" />
-    <Compile Include="Parser\SfxToken.cs" />
-    <Compile Include="Parser\SfxTokenType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SFXCodeCompletionPackage.cs" />
   </ItemGroup>
@@ -88,6 +90,10 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.7.2196" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Classification\ClassificationTypes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClassificationTypes.cs</LastGenOutput>
+    </Content>
     <Content Include="Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -107,6 +113,7 @@
       <LastGenOutput>GenerateKnownTokens.cs</LastGenOutput>
     </Content>
     <Content Include="Parser\Keywords.txt" />
+    <Content Include="Parser\Types.txt" />
     <Content Include="Parser\Variables.txt" />
     <Content Include="Resources\LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

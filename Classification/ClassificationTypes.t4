@@ -1,0 +1,39 @@
+﻿<#+
+    public class ClassificationDef
+    {
+        public string type;
+        public string desc;
+        public byte red;
+        public byte green;
+        public byte blue;
+
+        public ClassificationDef(string name, string desc, byte red, byte green, byte blue)
+        {
+            this.type = name;
+            this.desc = desc;
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+        }
+
+        public static List<ClassificationDef> classificationTypes = new List<ClassificationDef>()
+        {
+            new ClassificationDef("GlslSectionName",  "GLSL Section Name",     0xff, 0x11, 0x55),
+            new ClassificationDef("GlslFunction",     "GLSL Builtin Function", 0xf0, 0xc2, 0xb8),
+            new ClassificationDef("GlslKeyword",      "GLSL Builtin Keyword",  0xda, 0xcb, 0xa9),
+            new ClassificationDef("GlslVariable",     "GLSL Builtin Variable", 0xcb, 0xc9, 0xec),
+            new ClassificationDef("GlslBuiltinType",  "GLSL Builtin Type",     0xea, 0xc1, 0xd6),
+            new ClassificationDef("GlslUserFunction", "GLSL User Function",    0xb9, 0xd4, 0xb6),
+            new ClassificationDef("GlslIdentifier",   "GLSL Identifier",       0xf0, 0xc2, 0xb8),
+            new ClassificationDef("GlslNumber",       "GLSL Number",           0xf7, 0xd8, 0x7c),
+            new ClassificationDef("GlsPreprocessor",  "GLSL Preprocessor",     0x5c, 0x6e, 0x74),
+            new ClassificationDef("Operator",         "Operator",              0xd4, 0xd4, 0xd4),
+            new ClassificationDef("String",           "String",                0xa0, 0xd7, 0xd3),
+            new ClassificationDef("Comment",          "Comment",               0x80, 0x80, 0x80),
+            new ClassificationDef("Command",          "Command",               0xff, 0xa0, 0x6c),
+            new ClassificationDef("MetaSectionName",  "Meta Section Name",     0xff, 0x60, 0x37)
+        };
+    }
+
+#>
+

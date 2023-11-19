@@ -7,7 +7,7 @@ VertexInput uv (type = vec2, enableIf="!defined(VertexlessDraw)");
 
 FragmentOutput diffuse (type = vec4);
 
-Parameter diffuseTexture (type = texture, dim = 2D, enableIf="defined(HasDiffuseTexture)");
+Parameter diffuseTexture (type = texture, dim = e2D, enableIf="defined(HasDiffuseTexture)");
 Parameter color (type = vec4);
 
 Parameter spriteData (type = buffer, readonly, enableIf="defined(VertexlessDraw)")

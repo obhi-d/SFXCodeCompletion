@@ -1,0 +1,63 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="ClassificationTypes.t4" #>
+using Microsoft.VisualStudio.Text.Classification;
+using Microsoft.VisualStudio.Utilities;
+using System.ComponentModel.Composition;
+using Microsoft.VisualStudio.Language.StandardClassification;
+using System.Windows.Media;
+
+namespace SFXCodeCompletion.Classification
+{
+    internal class ClassificationTypes
+    {
+<#
+foreach(var classificationType in ClassificationDef.classificationTypes)
+{
+  var className = classificationType.type;
+#>
+      public const string <#=className#> = nameof(typeDef<#=className#>);
+      [Export]
+      [Name(<#=className#>)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      private static readonly ClassificationTypeDefinition typeDef<#=className#>;
+
+<#
+}
+#>
+    }
+
+<#
+
+foreach(var classificationType in ClassificationDef.classificationTypes)
+{
+			var desc = classificationType.desc;
+			var className = classificationType.type;
+			byte red = classificationType.red;
+			byte green = classificationType.green;
+			byte blue = classificationType.blue;
+#>
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = ClassificationTypes.<#=className#>)]
+	[Name(nameof(<#=className#>FormatDef))]
+	//this should be visible to the end user
+	[UserVisible(true)]
+	//set the priority to be after the default classifiers
+	[Order(Before = Priority.Default)]
+	internal sealed class <#=className#>FormatDef : ClassificationFormatDefinition
+	{
+		public <#=className#>FormatDef()
+		{
+			DisplayName = "SFX: <#=desc#>"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(<#=red#>, <#=green#>, <#=blue#>);
+		}
+	}
+
+
+<#
+}
+#>
+}

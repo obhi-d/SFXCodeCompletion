@@ -19,6 +19,7 @@ namespace SFXCodeCompletion.Parser
 			var functions = "<#=read("Functions.txt")#>".Trim().Split();
 			var variables = "<#=read("Variables.txt")#>".Trim().Split();
 			var commands = "<#=read("Commands.txt")#>".Trim().Split();
+			var types = "<#=read("Types.txt")#>".Trim().Split();
 
 			var result = new Dictionary<string, SfxTokenType>();
 
@@ -26,6 +27,7 @@ namespace SFXCodeCompletion.Parser
 			result.AddRange(functions, SfxTokenType.Function);
 			result.AddRange(variables, SfxTokenType.Variable);
 			result.AddRange(commands, SfxTokenType.Command);
+			result.AddRange(types, SfxTokenType.Type);
 			return result;
 		}
 

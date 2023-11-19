@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
+using SFXCodeCompletion.Classification;
 using SFXCodeCompletion.Parser;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,7 @@ namespace SFXCodeCompletion.CodeCompletion
                 var tokens = classifier.GetClassificationSpans(snapshotSpan);
                 //only those tokens that are identifiers and do not overlap the input position because we do not want to add char that started session to completions
                 var filtered = from token in tokens
-                               where token.ClassificationType.IsOfType(PredefinedClassificationTypeNames.Identifier)
+                               where (token.ClassificationType.IsOfType(ClassificationTypes.GlslIdentifier) || token.ClassificationType.IsOfType(ClassificationTypes.GlslUserFunction))
                                 && !token.Span.Contains(snapshotSpan.End - 1)
                                let text = token.Span.GetText()
                                orderby text
