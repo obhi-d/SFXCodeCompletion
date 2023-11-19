@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Utilities;
 using System;
+using System.ComponentModel.Composition;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Task = System.Threading.Tasks.Task;
@@ -27,6 +29,16 @@ namespace SFXCodeCompletion
     [Guid(SFXCodeCompletionPackage.PackageGuidString)]
     public sealed class SFXCodeCompletionPackage : AsyncPackage
     {
+        [Export]
+        [FileExtension(".sfx")]
+        [ContentType("sfx")]
+        internal FileExtensionToContentTypeDefinition gfxFileExtensionDefinition = null;
+        //
+        [Export]
+        [Name("sfx")]
+        [BaseDefinition("code")]
+        internal static ContentTypeDefinition gfxContentType = null;
+
         /// <summary>
         /// SFXCodeCompletionPackage GUID string.
         /// </summary>

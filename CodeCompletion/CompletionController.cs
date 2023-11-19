@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace SFXCodeCompletion.CodeCompletion
 {
     [Export(typeof(IVsTextViewCreationListener))]
-    [ContentType("sfxShader")]
+    [ContentType("sfx")]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     internal sealed class VsTextViewCreationListener : IVsTextViewCreationListener
     {

@@ -11,7 +11,8 @@ namespace SFXCodeCompletion.Classification
         public const string Keyword = nameof(glslKeyword);
         public const string Variable = nameof(glslVariable);
         public const string Command = nameof(sfxCommand);
-        public const string SectionName = nameof(sfxSectionName);
+        public const string GlslSectionName = nameof(glslSectionName);
+        public const string MetaSectionName = nameof(metaSectionName);
 
 
         [Export]
@@ -35,8 +36,13 @@ namespace SFXCodeCompletion.Classification
         private static readonly ClassificationTypeDefinition sfxCommand;
 
         [Export]
-        [Name(SectionName)]
+        [Name(GlslSectionName)]
         [BaseDefinition(PredefinedClassificationTypeNames.MarkupNode)]
-        private static readonly ClassificationTypeDefinition sfxSectionName;
+        private static readonly ClassificationTypeDefinition glslSectionName;
+
+        [Export]
+        [Name(MetaSectionName)]
+        [BaseDefinition(PredefinedClassificationTypeNames.MarkupNode)]
+        private static readonly ClassificationTypeDefinition metaSectionName;
     }
 }

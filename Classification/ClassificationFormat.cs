@@ -66,23 +66,40 @@ namespace SFXCodeCompletion.Classification
         public CommandClassificationFormatDefinition()
         {
             DisplayName = "SFX Command"; //human readable version of the name
-            ForegroundColor = Color.FromRgb(0xaf, 0x5f, 0xff);
+            ForegroundColor = Color.FromRgb(0xf5, 0xa1, 0x0c);
         }
     }
 
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = ClassificationTypes.SectionName)]
-    [Name(nameof(SectionNameClassificationFormatDefinition))]
+    [ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslSectionName)]
+    [Name(nameof(GlslSectionNameClassificationFormatDefinition))]
     //this should be visible to the end user
     [UserVisible(true)]
     //set the priority to be after the default classifiers
     [Order(Before = Priority.Default)]
-    internal sealed class SectionNameClassificationFormatDefinition : ClassificationFormatDefinition
+    internal sealed class GlslSectionNameClassificationFormatDefinition : ClassificationFormatDefinition
     {
-        public SectionNameClassificationFormatDefinition()
+        public GlslSectionNameClassificationFormatDefinition()
         {
-            DisplayName = "SFX Section Name"; //human readable version of the name
+            DisplayName = "SFX GLSL Section Name"; //human readable version of the name
             ForegroundColor = Color.FromRgb(0xff, 0x14, 0x3f);
+        }
+    }
+
+
+    [Export(typeof(EditorFormatDefinition))]
+    [ClassificationType(ClassificationTypeNames = ClassificationTypes.MetaSectionName)]
+    [Name(nameof(MetaSectionNameClassificationFormatDefinition))]
+    //this should be visible to the end user
+    [UserVisible(true)]
+    //set the priority to be after the default classifiers
+    [Order(Before = Priority.Default)]
+    internal sealed class MetaSectionNameClassificationFormatDefinition : ClassificationFormatDefinition
+    {
+        public MetaSectionNameClassificationFormatDefinition()
+        {
+            DisplayName = "SFX Meta Section Name"; //human readable version of the name
+            ForegroundColor = Color.FromRgb(0xaf, 0xa4, 0x3f);
         }
     }
 }

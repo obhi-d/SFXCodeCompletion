@@ -13,20 +13,10 @@ namespace SFXCodeCompletion.Classification
 {
 
     [Export(typeof(IClassifierProvider))]
-    [ContentType("sfxShader")]
+    [ContentType("sfx")]
     [TagType(typeof(ClassificationTag))]
     internal class ClassifierProvider : IClassifierProvider
     {
-        [Export]
-        [FileExtension(".sfx")]
-        [ContentType("sfxShader")]
-        internal FileExtensionToContentTypeDefinition gfxFileExtensionDefinition;
-
-        [Export]
-        [Name("sfxShader")]
-        [BaseDefinition("code")]
-        internal static ContentTypeDefinition gfxContentType = null;
-
         [ImportingConstructor]
         public ClassifierProvider(IClassificationTypeRegistryService classificationTypeRegistry)
         {

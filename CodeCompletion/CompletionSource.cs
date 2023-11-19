@@ -15,7 +15,7 @@ using System.Windows.Media;
 namespace SFXCodeCompletion.CodeCompletion
 {
     [Export(typeof(ICompletionSourceProvider))]
-    [ContentType("sfxShader")]
+    [ContentType("sfx")]
     [Name("sfxCompletion")]
     internal class CompletionSourceProvider : ICompletionSourceProvider
     {

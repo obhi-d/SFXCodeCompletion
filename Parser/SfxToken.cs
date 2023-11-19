@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using Sprache;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +7,17 @@ using System.Threading.Tasks;
 
 namespace SFXCodeCompletion.Parser
 {
-    public class SfxToken : IPositionAware<SfxToken>
+    public class SfxToken
     {
-        public SfxToken(SfxTokenType type, string value)
+        public SfxToken(SfxTokenType type, int start, int length)
         {
             Type = type;
-            Value = value;
+            Start = start;
+            Length = length;
         }
 
         public int Length { get; private set; }
         public int Start { get; private set; }
         public SfxTokenType Type { get; private set; }
-        public string Value { get; private set; }
-
-        public SfxToken SetPos(Position startPos, int length)
-        {
-            Start = startPos.Pos;
-            Length = length;
-            return this;
-        }
     }
 }

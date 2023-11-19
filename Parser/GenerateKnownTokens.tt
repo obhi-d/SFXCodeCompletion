@@ -15,10 +15,11 @@ namespace SFXCodeCompletion.Parser
 	{
 		private static Dictionary<string, SfxTokenType> GetDictionary()
 		{
-			var keywords = "<#=read("Keywords.txt")#>".Split();
-			var functions = "<#=read("Functions.txt")#>".Split();
-			var variables = "<#=read("Variables.txt")#>".Split();
-			var commands = "<#=read("Commands.txt")#>".Split();
+			var keywords = "<#=read("Keywords.txt")#>".Trim().Split();
+			var functions = "<#=read("Functions.txt")#>".Trim().Split();
+			var variables = "<#=read("Variables.txt")#>".Trim().Split();
+			var commands = "<#=read("Commands.txt")#>".Trim().Split();
+
 			var result = new Dictionary<string, SfxTokenType>();
 
 			result.AddRange(keywords, SfxTokenType.Keyword);
@@ -26,6 +27,12 @@ namespace SFXCodeCompletion.Parser
 			result.AddRange(variables, SfxTokenType.Variable);
 			result.AddRange(commands, SfxTokenType.Command);
 			return result;
+		}
+
+		private static HashSet<string> GetCommands()
+		{
+			var commands = "<#=read("Commands.txt")#>".Trim().Split();
+			return new HashSet<string>(commands);
 		}
 	}
 }

@@ -9,11 +9,17 @@ namespace SFXCodeCompletion.Parser
     public static partial class KnownTokens
     {
         private static readonly Dictionary<string, SfxTokenType> knownTokens = GetDictionary();
+        private static readonly HashSet<string> knownCommands = GetCommands();
         public static IEnumerable<KeyValuePair<string, SfxTokenType>> ReservedWords => knownTokens;
 
         public static SfxTokenType GetKnownTokenType(string word)
         {
             if (knownTokens.TryGetValue(word, out var type)) return type;
+            return SfxTokenType.Identifier;
+        }
+        public static SfxTokenType GetCommandType(string word)
+        {
+            if (knownCommands.Contains(word)) return SfxTokenType.Command;
             return SfxTokenType.Identifier;
         }
 

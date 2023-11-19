@@ -1,0 +1,23 @@
+{
+  "name": "sfx-syntaxes",
+  "displayName": "SFX Shader Syntax Highlighter",
+  "description": "Provide syntax highlighting for tmlanguage",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{
+            "id": "sfx",
+            "aliases": ["SFX", "sfx"],
+            "extensions": [".sfx"],
+            "configuration": "./sfx.configuration.json"
+        }],
+        "grammars": [{
+            "language": "sfx",
+            "scopeName": "source.sfx",
+            "path": "./Grammars/sfx.tmLanguage.json"
+        }]
+  }
+}

@@ -31,7 +31,8 @@ namespace SFXCodeCompletion.Classification
             Function = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Function);
             Keyword = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Keyword);
             Command = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Command);
-            SectionName = classificationTypeRegistry.GetClassificationType(ClassificationTypes.SectionName);
+            GlslSectionName = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslSectionName);
+            MetaSectionName = classificationTypeRegistry.GetClassificationType(ClassificationTypes.MetaSectionName);
             Variable = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Variable);
             parser = new Parser.Lexer();
         }
@@ -43,10 +44,11 @@ namespace SFXCodeCompletion.Classification
         {
             var output = new List<ClassificationSpan>();
             var text = snapshotSpan.GetText();
-            foreach (var token in parser.Tokenize(text))
+            var tokens = parser.Tokenize(text);
+            for (int t = 0; t < tokens.Count(); ++t)
             {
-                var lineSpan = new SnapshotSpan(snapshotSpan.Snapshot, token.Start, token.Length);
-                output.Add(new ClassificationSpan(lineSpan, Convert(token)));
+                var lineSpan = new SnapshotSpan(snapshotSpan.Snapshot, tokens.starts[t], tokens.lengths[t]);
+                output.Add(new ClassificationSpan(lineSpan, Convert(tokens.types[t])));
             }
             return output;
         }
@@ -65,12 +67,13 @@ namespace SFXCodeCompletion.Classification
         private IClassificationType Command { get; }
         private IClassificationType ParameterName { get; }
         private IClassificationType ParameterValue { get; }
-        private IClassificationType SectionName { get; }
+        private IClassificationType GlslSectionName { get; }
+        private IClassificationType MetaSectionName { get; }
         private IClassificationType Variable { get; }
 
-        private IClassificationType Convert(SfxToken token)
+        private IClassificationType Convert(SfxTokenType token)
         {
-            switch (token.Type)
+            switch (token)
             {
                 case SfxTokenType.Comment: return Comment;
                 case SfxTokenType.Function: return Function;
@@ -80,7 +83,8 @@ namespace SFXCodeCompletion.Classification
                 case SfxTokenType.Preprocessor: return PreprocessorKeyword;
                 case SfxTokenType.Variable: return Variable;
                 case SfxTokenType.Identifier: return Identifier;
-                case SfxTokenType.Section: return SectionName;
+                case SfxTokenType.GlslSection: return GlslSectionName;
+                case SfxTokenType.MetaSection: return MetaSectionName;
                 case SfxTokenType.QuotedString: return QuotedString;
                 case SfxTokenType.Command: return Command;
                 default:

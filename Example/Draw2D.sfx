@@ -1,0 +1,70 @@
+
+Macro HasDiffuseTexture (default = undefined);
+Macro VertexlessDraw (default = undefined);
+
+VertexInput position (type = vec3, enableIf="!defined(VertexlessDraw)");
+VertexInput uv (type = vec2, enableIf="!defined(VertexlessDraw)");
+
+FragmentOutput diffuse (type = vec4);
+
+Parameter diffuseTexture (type = texture, dim = 2D, enableIf="defined(HasDiffuseTexture)");
+Parameter color (type = vec4);
+
+Parameter spriteData (type = buffer, readonly, enableIf="defined(VertexlessDraw)")
+{
+  Member "SpriteData data[]";
+}
+
+Pass GBufferDraw;
+Pass Lighting;
+
+-- glsl : default --
+
+struct SpriteData
+{
+  vec2 position;
+  vec2 uv;
+  float depth;
+  float width;
+  float height;
+  uint  color;
+};
+
+vec4 decodeRGBA(uint rgba) 
+{
+    float r = float((rgba >> 24) & 0xFF) / 255.0;
+    float g = float((rgba >> 16) & 0xFF) / 255.0;
+    float b = float((rgba >> 8) & 0xFF) / 255.0;
+    float a = float(rgba & 0xFF) / 255.0;
+    return vec4(r, g, b, a);
+}
+
+
+-- glsl : draw.main.vs --
+
+#if defined(HasDiffuseTexture)
+out vec2 uv;
+#endif
+
+void main()
+{
+#ifdef VertexlessDraw
+	gl_Position = sample(position_and_size, gl_VertexID >> 2);
+#else
+	gl_Position = vec4(position, 1.0);
+#endif
+}
+
+
+-- glsl : draw.main.fs --
+
+in vec2 uv;
+
+void main()
+{
+	#if defined(HasDiffuseTexture)
+		vec4 diffuse = texture(diffuseTexture, uv);
+    #else
+        vec4 diffuse = vec4(1.0);
+    #endif
+}

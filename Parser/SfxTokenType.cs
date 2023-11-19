@@ -9,7 +9,8 @@ namespace SFXCodeCompletion.Parser
     public enum SfxTokenType
     {
         Command,
-        Section,
+        GlslSection,
+        MetaSection,
         Function,
         Identifier,
         Keyword,
