@@ -17,6 +17,7 @@ namespace SFXCodeCompletion.CodeCompletion
 {
   [Export(typeof(ICompletionSourceProvider))]
   [ContentType("sfx")]
+  [ContentType("glsl")]
   [Name("sfxCompletion")]
   internal class CompletionSourceProvider : ICompletionSourceProvider
   {
