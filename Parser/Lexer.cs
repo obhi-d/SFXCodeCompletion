@@ -287,8 +287,8 @@ namespace SFXCodeCompletion.Parser
                                 lineCommentEnd = input.Length - 1;
                                 length = input.Length - index;
                             }
-                            index = lineCommentEnd + 1;
                             Add(index, length, SfxTokenType.Comment);
+                            index = lineCommentEnd + 1;
                         }
                         else if (index + 1 < input.Length && input[index + 1] == '*')
                         {
@@ -301,8 +301,8 @@ namespace SFXCodeCompletion.Parser
                                 blockCommentEnd = input.Length - 2;
                                 length = input.Length - index;
                             }
-                            index = blockCommentEnd + 2;
                             Add(index, length, SfxTokenType.Comment);
+                            index = blockCommentEnd + 2;
                         }
                         else
                         {

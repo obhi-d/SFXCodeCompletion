@@ -1,7 +1,8 @@
-Macro
-VertexInput
-FragmentOutput
-Parameter
-Buffer
-Member
-Pass
+import
+macro
+input
+output
+parameter
+buffer
+member
+pass

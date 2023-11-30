@@ -18,13 +18,13 @@
 
         public static List<ClassificationDef> classificationTypes = new List<ClassificationDef>()
         {
-            new ClassificationDef("GlslSectionName",  "GLSL Section Name",     0xff, 0x11, 0x55),
+            new ClassificationDef("GlslSectionName",  "GLSL Section Name",       84,  207,  149),
             new ClassificationDef("GlslFunction",     "GLSL Builtin Function", 0xf0, 0xc2, 0xb8),
-            new ClassificationDef("GlslKeyword",      "GLSL Builtin Keyword",  0xda, 0xcb, 0xa9),
-            new ClassificationDef("GlslVariable",     "GLSL Builtin Variable", 0xcb, 0xc9, 0xec),
-            new ClassificationDef("GlslBuiltinType",  "GLSL Builtin Type",     0xea, 0xc1, 0xd6),
+            new ClassificationDef("GlslKeyword",      "GLSL Builtin Keyword",   255,   72,   75),
+            new ClassificationDef("GlslVariable",     "GLSL Builtin Variable",  252,  188,  188),
+            new ClassificationDef("GlslBuiltinType",  "GLSL Builtin Type",      183,  197,  244),
             new ClassificationDef("GlslUserFunction", "GLSL User Function",    0xb9, 0xd4, 0xb6),
-            new ClassificationDef("GlslIdentifier",   "GLSL Identifier",       0xf0, 0xc2, 0xb8),
+            new ClassificationDef("GlslIdentifier",   "GLSL Identifier",        212,  212,  212),
             new ClassificationDef("GlslNumber",       "GLSL Number",           0xf7, 0xd8, 0x7c),
             new ClassificationDef("GlsPreprocessor",  "GLSL Preprocessor",     0x5c, 0x6e, 0x74),
             new ClassificationDef("Operator",         "Operator",              0xd4, 0xd4, 0xd4),

@@ -182,7 +182,7 @@ namespace SFXCodeCompletion.Classification
 		public GlslVariableFormatDef()
 		{
 			DisplayName = "SFX: GLSL Builtin Variable"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(203, 201, 236);
+			ForegroundColor = Color.FromRgb(252, 221, 199);
 		}
 	}
 
@@ -200,7 +200,7 @@ namespace SFXCodeCompletion.Classification
 		public GlslBuiltinTypeFormatDef()
 		{
 			DisplayName = "SFX: GLSL Builtin Type"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(234, 193, 214);
+			ForegroundColor = Color.FromRgb(183, 197, 244);
 		}
 	}
 
@@ -236,7 +236,7 @@ namespace SFXCodeCompletion.Classification
 		public GlslIdentifierFormatDef()
 		{
 			DisplayName = "SFX: GLSL Identifier"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(240, 194, 184);
+			ForegroundColor = Color.FromRgb(212, 212, 212);
 		}
 	}
 

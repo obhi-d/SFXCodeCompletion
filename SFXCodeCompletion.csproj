@@ -63,7 +63,7 @@
     <Compile Include="CodeCompletion\CompletionSource.cs" />
     <Compile Include="Outlining\OutliningTagger.cs" />
     <Compile Include="Outlining\OutliningTaggerProvider.cs" />
-    <Compile Include="Parser\GenerateKnownTokens.cs">
+    <Compile Include="Parser\GenerateKnownTokens1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GenerateKnownTokens.tt</DependentUpon>
@@ -110,7 +110,7 @@
     <Content Include="Parser\Functions.txt" />
     <Content Include="Parser\GenerateKnownTokens.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GenerateKnownTokens.cs</LastGenOutput>
+      <LastGenOutput>GenerateKnownTokens1.cs</LastGenOutput>
     </Content>
     <Content Include="Parser\Keywords.txt" />
     <Content Include="Parser\Types.txt" />
