@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SFXCodeCompletion.4f2ac353-9130-4dda-ac1d-3a23cc52f8a2" Version="1.1" Language="en-US" Publisher="Abhishek Dey" />
+        <Identity Id="SFXCodeCompletion.4f2ac353-9130-4dda-ac1d-3a23cc52f8a2" Version="1.2" Language="en-US" Publisher="Abhishek Dey" />
         <DisplayName>SFX Syntax Highlighter</DisplayName>
         <Description xml:space="preserve">SFX Language extension.</Description>
         <License>Resources\LICENSE.txt</License>

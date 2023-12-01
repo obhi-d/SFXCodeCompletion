@@ -294,7 +294,7 @@ namespace SFXCodeCompletion.Parser
             {
               // Block Comment
               int blockCommentEnd = input.IndexOf("*/", index + 2);
-              length = blockCommentEnd - index;
+              length = (blockCommentEnd + 2) - index;
               if (blockCommentEnd == -1)
               {
                 // Unterminated block comment
