@@ -27,6 +27,7 @@ namespace SFXCodeCompletion.Parser
 			result.AddRange(variables, SfxTokenType.Variable);
 			result.AddRange(types, SfxTokenType.Type);
 			return result;
+
 		}
 
 		private static HashSet<string> GetCommands()

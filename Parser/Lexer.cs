@@ -328,7 +328,10 @@ namespace SFXCodeCompletion.Parser
             // Skip whitespaces
             index++;
             break;
-
+          default:
+            // Skip 
+            index++;
+            break;
         }
       }
 
