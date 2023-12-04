@@ -97,22 +97,26 @@ namespace SFXCodeCompletion.Outlining
             prePoints.Push(classificationSpan.Span.End);
           else if (restartMarker.Contains(text))
           {
-            var start = prePoints.Pop();
-            var end = classificationSpan.Span.Start;
-            if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
+            if (0 != prePoints.Count)
             {
-              var span = new SnapshotSpan(start + 1, last.Span.End);
-              output.Add(span);
+              var start = prePoints.Pop();
+              var end = classificationSpan.Span.Start;
+              if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
+              {
+                var span = new SnapshotSpan(start + 1, last.Span.End);
+                output.Add(span);
+              }
             }
             prePoints.Push(classificationSpan.Span.End);
           }
           else if (endMarker.Contains(text))
           {
+            if (0 == prePoints.Count) continue;
             var start = prePoints.Pop();
             var end = classificationSpan.Span.Start;
             if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
             {
-              var span = new SnapshotSpan(start + 1, last.Span.End);
+              var span = new SnapshotSpan(start + 1, end + 1);
               output.Add(span);
             }
           }

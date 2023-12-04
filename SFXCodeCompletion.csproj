@@ -74,7 +74,6 @@
     <Compile Include="SFXCodeCompletionPackage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Grammars\sfx.tmLanguage.json" />
     <None Include="Parser\FileReader.t4" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
@@ -99,10 +98,6 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="IconPreview.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="languages.pkgdef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

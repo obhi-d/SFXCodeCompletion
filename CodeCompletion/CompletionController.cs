@@ -244,6 +244,8 @@ namespace SFXCodeCompletion.CodeCompletion
       if (_currentSession is null) return false;
 
       _currentSession.Dismissed += (sender, args) => _currentSession = null;
+      if (_currentSession.IsStarted)
+        return false;
       _currentSession.Start();
       return true;
     }
