@@ -51,7 +51,7 @@ foreach(var classificationType in ClassificationDef.classificationTypes)
 	{
 		public <#=className#>FormatDef()
 		{
-			DisplayName = "SFX: <#=desc#>"; //human readable version of the name
+			DisplayName = "GLSL: <#=desc#>"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(<#=red#>, <#=green#>, <#=blue#>);
 		}
 	}

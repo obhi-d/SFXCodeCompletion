@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 using SFXCodeCompletion.Classification;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 
 namespace SFXCodeCompletion.Outlining
@@ -50,6 +51,9 @@ namespace SFXCodeCompletion.Outlining
 
     private const char startHide = '{';     //the characters that start the outlining region
     private const char endHide = '}';       //the characters that end the outlining region
+    private const string startMarker = "#if";
+    private const string restartMarker = "#else;#elif";
+    private const string endMarker = "#endif";
     private const string ellipsis = "...";    //the characters that are displayed when the region is collapsed
     private IList<SnapshotSpan> regionSpans = new List<SnapshotSpan>();
 
@@ -58,7 +62,9 @@ namespace SFXCodeCompletion.Outlining
       var classificationSpans = classifier.GetClassificationSpans(snapshotSpan);
 
       var points = new Stack<SnapshotPoint>();
+      var prePoints = new Stack<SnapshotPoint>();
       var output = new List<SnapshotSpan>();
+      ClassificationSpan last = null;
 
       foreach (var classificationSpan in classificationSpans)
       {
@@ -76,7 +82,7 @@ namespace SFXCodeCompletion.Outlining
               if (0 == points.Count) continue;
               var start = points.Pop();
               var end = classificationSpan.Span.Start + i;
-              if (start.GetContainingLine().LineNumber != end.GetContainingLine().LineNumber)
+              if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
               {
                 var span = new SnapshotSpan(start, end + 1);
                 output.Add(span);
@@ -84,6 +90,34 @@ namespace SFXCodeCompletion.Outlining
             }
           }
         }
+        else if (classificationSpan.ClassificationType.IsOfType(ClassificationTypes.GlslPreprocessor))
+        {
+          var text = classificationSpan.Span.GetText();
+          if (text.StartsWith(startMarker))
+            prePoints.Push(classificationSpan.Span.End);
+          else if (restartMarker.Contains(text))
+          {
+            var start = prePoints.Pop();
+            var end = classificationSpan.Span.Start;
+            if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
+            {
+              var span = new SnapshotSpan(start + 1, last.Span.End);
+              output.Add(span);
+            }
+            prePoints.Push(classificationSpan.Span.End);
+          }
+          else if (endMarker.Contains(text))
+          {
+            var start = prePoints.Pop();
+            var end = classificationSpan.Span.Start;
+            if (start.GetContainingLineNumber() != end.GetContainingLineNumber())
+            {
+              var span = new SnapshotSpan(start + 1, last.Span.End);
+              output.Add(span);
+            }
+          }
+        }
+        last = classificationSpan;
       }
       return output;
     }

@@ -106,6 +106,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Parser\CommandParams.txt" />
     <Content Include="Parser\Commands.txt" />
     <Content Include="Parser\Functions.txt" />
     <Content Include="Parser\GenerateKnownTokens.tt">

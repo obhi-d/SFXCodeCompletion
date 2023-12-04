@@ -32,8 +32,14 @@ namespace SFXCodeCompletion.Parser
 
 		private static HashSet<string> GetCommands()
 		{
-			var commands = "import macro input output parameter buffer member pass".Trim().Split();
+			var commands = "import enum input output parameter member pass".Trim().Split();
 			return new HashSet<string>(commands);
+		}
+				
+		private static HashSet<string> GetCommandParams()
+		{
+			var commandParams = "default values type enableIf dim layout stages".Trim().Split();
+			return new HashSet<string>(commandParams);
 		}
 	}
 }

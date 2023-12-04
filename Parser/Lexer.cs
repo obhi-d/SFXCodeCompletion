@@ -19,6 +19,7 @@ namespace SFXCodeCompletion.Parser
   {
     None,
     Command,
+    CommandParam,
     GlslSection,
     MetaSection,
     Type,
@@ -46,6 +47,7 @@ namespace SFXCodeCompletion.Parser
     private IClassificationType Function { get; }
     private IClassificationType Keyword { get; }
     private IClassificationType Command { get; }
+    private IClassificationType CommandParam { get; }
     private IClassificationType GlslSection { get; }
     private IClassificationType MetaSection { get; }
     private IClassificationType Variable { get; }
@@ -68,6 +70,7 @@ namespace SFXCodeCompletion.Parser
         case SfxTokenType.MetaSection: return MetaSection;
         case SfxTokenType.QuotedString: return QuotedString;
         case SfxTokenType.Command: return Command;
+        case SfxTokenType.CommandParam: return CommandParam;
         case SfxTokenType.Type: return BuiltinType;
         case SfxTokenType.UserFunction: return UserFunction;
         default:
@@ -82,11 +85,12 @@ namespace SFXCodeCompletion.Parser
       Number = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslNumber);
       Operator = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Operator);
       QuotedString = classificationTypeRegistry.GetClassificationType(ClassificationTypes.String);
-      PreprocessorKeyword = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlsPreprocessor);
+      PreprocessorKeyword = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslPreprocessor);
 
       Function = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslFunction);
       Keyword = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslKeyword);
       Command = classificationTypeRegistry.GetClassificationType(ClassificationTypes.Command);
+      CommandParam = classificationTypeRegistry.GetClassificationType(ClassificationTypes.CommandParam);
       GlslSection = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslSectionName);
       MetaSection = classificationTypeRegistry.GetClassificationType(ClassificationTypes.MetaSectionName);
       Variable = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslVariable);
@@ -179,8 +183,7 @@ namespace SFXCodeCompletion.Parser
             if (IsLineBegin(input, index) && sectionEndIndex < input.Length && input[sectionEndIndex] == '-')
             {
               sectionEndIndex++;
-              if (TrimCheck("glsl", input, ref sectionEndIndex) && TrimCheck(":", input, ref sectionEndIndex))
-                inGlsl = true;
+              inGlsl = (TrimCheck("glsl", input, ref sectionEndIndex) && TrimCheck(":", input, ref sectionEndIndex));
               sectionEndIndex = EndOfLine(input, sectionEndIndex);
               Add(index, sectionEndIndex - index, inGlsl ? SfxTokenType.GlslSection : SfxTokenType.MetaSection);
               index = sectionEndIndex;
@@ -320,7 +323,7 @@ namespace SFXCodeCompletion.Parser
               identifierEndIndex++;
             }
             length = identifierEndIndex - index;
-            Add(index, length, inGlsl ? KnownTokens.GetKnownTokenType(input.Substring(index, length)) : KnownTokens.GetCommandType(input.Substring(index, length)));
+            Add(index, length, inGlsl ? KnownTokens.GetKnownTokenType(input.Substring(index, length)) : KnownTokens.GetCommandOrParamType(input.Substring(index, length)));
             index = identifierEndIndex;
             break;
 

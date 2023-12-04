@@ -36,6 +36,7 @@ namespace SFXCodeCompletion.CodeCompletion
       var function = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupMethod, StandardGlyphItem.GlyphItemPublic);
       var variable = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupVariable, StandardGlyphItem.GlyphItemPublic);
       var command = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupIntrinsic, StandardGlyphItem.GlyphItemPublic);
+      var commandParam = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
       ImageSource ConvertReservedType(SfxTokenType type)
       {
         switch (type)
@@ -54,6 +55,10 @@ namespace SFXCodeCompletion.CodeCompletion
       foreach (var var in KnownTokens.ReservedCmds)
       {
         staticCommandCompletions.Add(CompletionSource.NewCompletion(var, command));
+      }
+      foreach (var var in KnownTokens.ReservedCmdParams)
+      {
+        staticCommandCompletions.Add(CompletionSource.NewCompletion(var, commandParam));
       }
 
       staticGlslCompletions.Sort((a, b) => a.DisplayText.CompareTo(b.DisplayText));

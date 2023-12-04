@@ -1,8 +1,7 @@
 import
-macro
+enum
 input
 output
 parameter
-buffer
 member
 pass

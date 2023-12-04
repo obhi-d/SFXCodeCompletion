@@ -71,11 +71,11 @@ namespace SFXCodeCompletion.Classification
       private static readonly ClassificationTypeDefinition typeDefGlslNumber;
 
 
-      public const string GlsPreprocessor = nameof(typeDefGlsPreprocessor);
+      public const string GlslPreprocessor = nameof(typeDefGlslPreprocessor);
       [Export]
-      [Name(GlsPreprocessor)]
+      [Name(GlslPreprocessor)]
       [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
-      private static readonly ClassificationTypeDefinition typeDefGlsPreprocessor;
+      private static readonly ClassificationTypeDefinition typeDefGlslPreprocessor;
 
 
       public const string Operator = nameof(typeDefOperator);
@@ -106,6 +106,13 @@ namespace SFXCodeCompletion.Classification
       private static readonly ClassificationTypeDefinition typeDefCommand;
 
 
+      public const string CommandParam = nameof(typeDefCommandParam);
+      [Export]
+      [Name(CommandParam)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      private static readonly ClassificationTypeDefinition typeDefCommandParam;
+
+
       public const string MetaSectionName = nameof(typeDefMetaSectionName);
       [Export]
       [Name(MetaSectionName)]
@@ -127,8 +134,8 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslSectionNameFormatDef()
 		{
-			DisplayName = "SFX: GLSL Section Name"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(255, 17, 85);
+			DisplayName = "GLSL: GLSL Section Name"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(84, 207, 149);
 		}
 	}
 
@@ -145,7 +152,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslFunctionFormatDef()
 		{
-			DisplayName = "SFX: GLSL Builtin Function"; //human readable version of the name
+			DisplayName = "GLSL: GLSL Builtin Function"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(240, 194, 184);
 		}
 	}
@@ -163,8 +170,8 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslKeywordFormatDef()
 		{
-			DisplayName = "SFX: GLSL Builtin Keyword"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(218, 203, 169);
+			DisplayName = "GLSL: GLSL Builtin Keyword"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(255, 72, 75);
 		}
 	}
 
@@ -181,8 +188,8 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslVariableFormatDef()
 		{
-			DisplayName = "SFX: GLSL Builtin Variable"; //human readable version of the name
-			ForegroundColor = Color.FromRgb(252, 221, 199);
+			DisplayName = "GLSL: GLSL Builtin Variable"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(252, 188, 188);
 		}
 	}
 
@@ -199,7 +206,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslBuiltinTypeFormatDef()
 		{
-			DisplayName = "SFX: GLSL Builtin Type"; //human readable version of the name
+			DisplayName = "GLSL: GLSL Builtin Type"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(183, 197, 244);
 		}
 	}
@@ -217,7 +224,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslUserFunctionFormatDef()
 		{
-			DisplayName = "SFX: GLSL User Function"; //human readable version of the name
+			DisplayName = "GLSL: GLSL User Function"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(185, 212, 182);
 		}
 	}
@@ -235,7 +242,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslIdentifierFormatDef()
 		{
-			DisplayName = "SFX: GLSL Identifier"; //human readable version of the name
+			DisplayName = "GLSL: GLSL Identifier"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(212, 212, 212);
 		}
 	}
@@ -253,7 +260,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public GlslNumberFormatDef()
 		{
-			DisplayName = "SFX: GLSL Number"; //human readable version of the name
+			DisplayName = "GLSL: GLSL Number"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(247, 216, 124);
 		}
 	}
@@ -261,17 +268,17 @@ namespace SFXCodeCompletion.Classification
 
 
 	[Export(typeof(EditorFormatDefinition))]
-	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlsPreprocessor)]
-	[Name(nameof(GlsPreprocessorFormatDef))]
+	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslPreprocessor)]
+	[Name(nameof(GlslPreprocessorFormatDef))]
 	//this should be visible to the end user
 	[UserVisible(true)]
 	//set the priority to be after the default classifiers
 	[Order(Before = Priority.Default)]
-	internal sealed class GlsPreprocessorFormatDef : ClassificationFormatDefinition
+	internal sealed class GlslPreprocessorFormatDef : ClassificationFormatDefinition
 	{
-		public GlsPreprocessorFormatDef()
+		public GlslPreprocessorFormatDef()
 		{
-			DisplayName = "SFX: GLSL Preprocessor"; //human readable version of the name
+			DisplayName = "GLSL: GLSL Preprocessor"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(92, 110, 116);
 		}
 	}
@@ -289,7 +296,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public OperatorFormatDef()
 		{
-			DisplayName = "SFX: Operator"; //human readable version of the name
+			DisplayName = "GLSL: Operator"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(212, 212, 212);
 		}
 	}
@@ -307,7 +314,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public StringFormatDef()
 		{
-			DisplayName = "SFX: String"; //human readable version of the name
+			DisplayName = "GLSL: String"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(160, 215, 211);
 		}
 	}
@@ -325,7 +332,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public CommentFormatDef()
 		{
-			DisplayName = "SFX: Comment"; //human readable version of the name
+			DisplayName = "GLSL: Comment"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(128, 128, 128);
 		}
 	}
@@ -343,8 +350,26 @@ namespace SFXCodeCompletion.Classification
 	{
 		public CommandFormatDef()
 		{
-			DisplayName = "SFX: Command"; //human readable version of the name
+			DisplayName = "GLSL: Command"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(255, 160, 108);
+		}
+	}
+
+
+
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = ClassificationTypes.CommandParam)]
+	[Name(nameof(CommandParamFormatDef))]
+	//this should be visible to the end user
+	[UserVisible(true)]
+	//set the priority to be after the default classifiers
+	[Order(Before = Priority.Default)]
+	internal sealed class CommandParamFormatDef : ClassificationFormatDefinition
+	{
+		public CommandParamFormatDef()
+		{
+			DisplayName = "GLSL: CommandParam"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(245, 158, 180);
 		}
 	}
 
@@ -361,7 +386,7 @@ namespace SFXCodeCompletion.Classification
 	{
 		public MetaSectionNameFormatDef()
 		{
-			DisplayName = "SFX: Meta Section Name"; //human readable version of the name
+			DisplayName = "GLSL: Meta Section Name"; //human readable version of the name
 			ForegroundColor = Color.FromRgb(255, 96, 55);
 		}
 	}
