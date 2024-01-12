@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Classification\ClassificationTypes.t4" />
-    <Compile Include="Classification\ClassificationTypes.cs">
+    <Compile Include="Classification\ClassificationTypes1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassificationTypes.tt</DependentUpon>
@@ -91,7 +91,7 @@
   <ItemGroup>
     <Content Include="Classification\ClassificationTypes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClassificationTypes.cs</LastGenOutput>
+      <LastGenOutput>ClassificationTypes1.cs</LastGenOutput>
     </Content>
     <Content Include="Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

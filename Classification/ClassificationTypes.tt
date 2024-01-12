@@ -18,11 +18,12 @@ namespace SFXCodeCompletion.Classification
 foreach(var classificationType in ClassificationDef.classificationTypes)
 {
   var className = classificationType.type;
+	var predef = classificationType.predef;
 #>
       public const string <#=className#> = nameof(typeDef<#=className#>);
       [Export]
       [Name(<#=className#>)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.<#=predef#>)]
       private static readonly ClassificationTypeDefinition typeDef<#=className#>;
 
 <#
@@ -39,12 +40,13 @@ foreach(var classificationType in ClassificationDef.classificationTypes)
 			byte red = classificationType.red;
 			byte green = classificationType.green;
 			byte blue = classificationType.blue;
+			string visible = classificationType.visible;
 #>
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.<#=className#>)]
 	[Name(nameof(<#=className#>FormatDef))]
 	//this should be visible to the end user
-	[UserVisible(true)]
+	[UserVisible(<#=visible#>)]
 	//set the priority to be after the default classifiers
 	[Order(Before = Priority.Default)]
 	internal sealed class <#=className#>FormatDef : ClassificationFormatDefinition
@@ -55,7 +57,6 @@ foreach(var classificationType in ClassificationDef.classificationTypes)
 			ForegroundColor = Color.FromRgb(<#=red#>, <#=green#>, <#=blue#>);
 		}
 	}
-
 
 <#
 }

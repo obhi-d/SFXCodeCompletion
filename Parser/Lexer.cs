@@ -32,7 +32,8 @@ namespace SFXCodeCompletion.Parser
     Variable,
     QuotedString,
     UserFunction,
-    Comment
+    Comment,
+    NewLine
   }
 
   public class Lexer
@@ -53,6 +54,7 @@ namespace SFXCodeCompletion.Parser
     private IClassificationType Variable { get; }
     private IClassificationType UserFunction { get; }
     private IClassificationType BuiltinType { get; }
+    private IClassificationType NewLine { get; }
 
     private IClassificationType Convert(SfxTokenType token)
     {
@@ -73,6 +75,7 @@ namespace SFXCodeCompletion.Parser
         case SfxTokenType.CommandParam: return CommandParam;
         case SfxTokenType.Type: return BuiltinType;
         case SfxTokenType.UserFunction: return UserFunction;
+        case SfxTokenType.NewLine: return NewLine;
         default:
           return Identifier;
       }
@@ -96,20 +99,9 @@ namespace SFXCodeCompletion.Parser
       Variable = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslVariable);
       BuiltinType = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslBuiltinType);
       UserFunction = classificationTypeRegistry.GetClassificationType(ClassificationTypes.GlslUserFunction);
-
+      NewLine = classificationTypeRegistry.GetClassificationType(ClassificationTypes.NewLine);
     }
 
-    enum State
-    {
-      LineStart,
-      TokenStart,
-      Identifier,
-      Number,
-      Comment,
-      BlockComment,
-      String,
-      MaybeSection
-    };
 
     static public bool IsOperator(char c)
     {
@@ -222,6 +214,23 @@ namespace SFXCodeCompletion.Parser
             Add(index, 1, SfxTokenType.Operator);
             index++;
             break;
+          case '=':
+            if (!inGlsl)
+            {
+              int last = classificationSpans.Count - 1;
+              while (last >= 0)
+              {
+                var lastType = classificationSpans[last];
+                if (lastType.ClassificationType == Convert(SfxTokenType.Identifier) || lastType.ClassificationType == Convert(SfxTokenType.Command))
+                {
+                  classificationSpans[last] = new ClassificationSpan(lastType.Span, Convert(SfxTokenType.CommandParam));
+                  break;
+                }
+              }
+            }
+            Add(index, 1, SfxTokenType.Operator);
+            index++;
+            break;
           case char c when IsOperator(c):
             Add(index, 1, SfxTokenType.Operator);
             index++;
@@ -323,10 +332,13 @@ namespace SFXCodeCompletion.Parser
               identifierEndIndex++;
             }
             length = identifierEndIndex - index;
-            Add(index, length, inGlsl ? KnownTokens.GetKnownTokenType(input.Substring(index, length)) : KnownTokens.GetCommandOrParamType(input.Substring(index, length)));
+            Add(index, length, inGlsl ? KnownTokens.GetKnownTokenType(input.Substring(index, length)) : KnownTokens.GetCommandType(input.Substring(index, length)));
             index = identifierEndIndex;
             break;
-
+          case '\n':
+            Add(index, 1, SfxTokenType.NewLine);
+            index++;
+            break;
           case char c when char.IsWhiteSpace(c):
             // Skip whitespaces
             index++;

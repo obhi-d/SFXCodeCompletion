@@ -5,3 +5,4 @@ output
 parameter
 member
 pass
+type

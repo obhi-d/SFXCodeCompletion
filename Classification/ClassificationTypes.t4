@@ -3,36 +3,41 @@
     {
         public string type;
         public string desc;
+        public string predef;
         public byte red;
         public byte green;
         public byte blue;
-
-        public ClassificationDef(string name, string desc, byte red, byte green, byte blue)
+        public string visible;
+                
+        public ClassificationDef(string name, string desc, string predef, byte red, byte green, byte blue, bool visible = true)
         {
             this.type = name;
             this.desc = desc;
             this.red = red;
             this.green = green;
             this.blue = blue;
+            this.predef = predef;
+            this.visible = visible ? "true" : "false";
         }
 
         public static List<ClassificationDef> classificationTypes = new List<ClassificationDef>()
         {
-            new ClassificationDef("GlslSectionName",  "GLSL Section Name",       84,  207,  149),
-            new ClassificationDef("GlslFunction",     "GLSL Builtin Function", 0xf0, 0xc2, 0xb8),
-            new ClassificationDef("GlslKeyword",      "GLSL Builtin Keyword",   255,   72,   75),
-            new ClassificationDef("GlslVariable",     "GLSL Builtin Variable",  252,  188,  188),
-            new ClassificationDef("GlslBuiltinType",  "GLSL Builtin Type",      183,  197,  244),
-            new ClassificationDef("GlslUserFunction", "GLSL User Function",    0xb9, 0xd4, 0xb6),
-            new ClassificationDef("GlslIdentifier",   "GLSL Identifier",        212,  212,  212),
-            new ClassificationDef("GlslNumber",       "GLSL Number",           0xf7, 0xd8, 0x7c),
-            new ClassificationDef("GlslPreprocessor", "GLSL Preprocessor",     0x5c, 0x6e, 0x74),
-            new ClassificationDef("Operator",         "Operator",              0xd4, 0xd4, 0xd4),
-            new ClassificationDef("String",           "String",                0xa0, 0xd7, 0xd3),
-            new ClassificationDef("Comment",          "Comment",               0x80, 0x80, 0x80),
-            new ClassificationDef("Command",          "Command",               0xff, 0xa0, 0x6c),
-            new ClassificationDef("CommandParam",     "CommandParam",          0xf5, 0x9e, 0xb4),
-            new ClassificationDef("MetaSectionName",  "Meta Section Name",     0xff, 0x60, 0x37)
+            new ClassificationDef("GlslSectionName",  "GLSL Section Name",     "MarkupAttribute",       84,  207,  149),
+            new ClassificationDef("GlslFunction",     "GLSL Builtin Function", "Identifier",          0xf0, 0xc2, 0xb8),
+            new ClassificationDef("GlslKeyword",      "GLSL Builtin Keyword",  "Identifier",           255,   72,   75),
+            new ClassificationDef("GlslVariable",     "GLSL Builtin Variable", "Identifier",           252,  188,  188),
+            new ClassificationDef("GlslBuiltinType",  "GLSL Builtin Type",     "Type",                 183,  197,  244),
+            new ClassificationDef("GlslUserFunction", "GLSL User Function",    "Identifier",          0xb9, 0xd4, 0xb6),
+            new ClassificationDef("GlslIdentifier",   "GLSL Identifier",       "Identifier",           212,  212,  212),
+            new ClassificationDef("GlslNumber",       "GLSL Number",           "Number",              0xf7, 0xd8, 0x7c),
+            new ClassificationDef("GlslPreprocessor", "GLSL Preprocessor",     "PreprocessorKeyword", 0x5c, 0x6e, 0x74),
+            new ClassificationDef("Operator",         "Operator",              "Operator",            0xd4, 0xd4, 0xd4),
+            new ClassificationDef("String",           "String",                "String",              0xa0, 0xd7, 0xd3),
+            new ClassificationDef("Comment",          "Comment",               "Comment",             0x80, 0x80, 0x80),
+            new ClassificationDef("Command",          "Command",               "MarkupNode",          0xff, 0xa0, 0x6c),
+            new ClassificationDef("CommandParam",     "CommandParam",          "MarkupAttribute",     0xf5, 0x9e, 0xb4),
+            new ClassificationDef("MetaSectionName",  "Meta Section Name",     "MarkupAttribute",     0xff, 0x60, 0x37),
+            new ClassificationDef("NewLine",          "NewLine",               "WhiteSpace",          0x0,  0x0,  0x0, false)
         };
     }
 

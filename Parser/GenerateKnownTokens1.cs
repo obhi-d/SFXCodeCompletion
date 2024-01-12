@@ -32,7 +32,7 @@ namespace SFXCodeCompletion.Parser
 
 		private static HashSet<string> GetCommands()
 		{
-			var commands = "import enum input output parameter member pass".Trim().Split();
+			var commands = "import enum input output parameter member pass type".Trim().Split();
 			return new HashSet<string>(commands);
 		}
 				

@@ -18,7 +18,7 @@ namespace SFXCodeCompletion.Classification
       public const string GlslSectionName = nameof(typeDefGlslSectionName);
       [Export]
       [Name(GlslSectionName)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.MarkupAttribute)]
       private static readonly ClassificationTypeDefinition typeDefGlslSectionName;
 
 
@@ -46,7 +46,7 @@ namespace SFXCodeCompletion.Classification
       public const string GlslBuiltinType = nameof(typeDefGlslBuiltinType);
       [Export]
       [Name(GlslBuiltinType)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Type)]
       private static readonly ClassificationTypeDefinition typeDefGlslBuiltinType;
 
 
@@ -67,57 +67,64 @@ namespace SFXCodeCompletion.Classification
       public const string GlslNumber = nameof(typeDefGlslNumber);
       [Export]
       [Name(GlslNumber)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Number)]
       private static readonly ClassificationTypeDefinition typeDefGlslNumber;
 
 
       public const string GlslPreprocessor = nameof(typeDefGlslPreprocessor);
       [Export]
       [Name(GlslPreprocessor)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.PreprocessorKeyword)]
       private static readonly ClassificationTypeDefinition typeDefGlslPreprocessor;
 
 
       public const string Operator = nameof(typeDefOperator);
       [Export]
       [Name(Operator)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Operator)]
       private static readonly ClassificationTypeDefinition typeDefOperator;
 
 
       public const string String = nameof(typeDefString);
       [Export]
       [Name(String)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.String)]
       private static readonly ClassificationTypeDefinition typeDefString;
 
 
       public const string Comment = nameof(typeDefComment);
       [Export]
       [Name(Comment)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.Comment)]
       private static readonly ClassificationTypeDefinition typeDefComment;
 
 
       public const string Command = nameof(typeDefCommand);
       [Export]
       [Name(Command)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.MarkupNode)]
       private static readonly ClassificationTypeDefinition typeDefCommand;
 
 
       public const string CommandParam = nameof(typeDefCommandParam);
       [Export]
       [Name(CommandParam)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.MarkupAttribute)]
       private static readonly ClassificationTypeDefinition typeDefCommandParam;
 
 
       public const string MetaSectionName = nameof(typeDefMetaSectionName);
       [Export]
       [Name(MetaSectionName)]
-      [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+      [BaseDefinition(PredefinedClassificationTypeNames.MarkupAttribute)]
       private static readonly ClassificationTypeDefinition typeDefMetaSectionName;
+
+
+      public const string NewLine = nameof(typeDefNewLine);
+      [Export]
+      [Name(NewLine)]
+      [BaseDefinition(PredefinedClassificationTypeNames.WhiteSpace)]
+      private static readonly ClassificationTypeDefinition typeDefNewLine;
 
 
     }
@@ -140,7 +147,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslFunction)]
 	[Name(nameof(GlslFunctionFormatDef))]
@@ -156,7 +162,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(240, 194, 184);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -176,7 +181,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslVariable)]
 	[Name(nameof(GlslVariableFormatDef))]
@@ -192,7 +196,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(252, 188, 188);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -212,7 +215,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslUserFunction)]
 	[Name(nameof(GlslUserFunctionFormatDef))]
@@ -228,7 +230,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(185, 212, 182);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -248,7 +249,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.GlslNumber)]
 	[Name(nameof(GlslNumberFormatDef))]
@@ -264,7 +264,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(247, 216, 124);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -284,7 +283,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.Operator)]
 	[Name(nameof(OperatorFormatDef))]
@@ -300,7 +298,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(212, 212, 212);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -320,7 +317,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.Comment)]
 	[Name(nameof(CommentFormatDef))]
@@ -336,7 +332,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(128, 128, 128);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -356,7 +351,6 @@ namespace SFXCodeCompletion.Classification
 	}
 
 
-
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = ClassificationTypes.CommandParam)]
 	[Name(nameof(CommandParamFormatDef))]
@@ -372,7 +366,6 @@ namespace SFXCodeCompletion.Classification
 			ForegroundColor = Color.FromRgb(245, 158, 180);
 		}
 	}
-
 
 
 	[Export(typeof(EditorFormatDefinition))]
@@ -391,6 +384,22 @@ namespace SFXCodeCompletion.Classification
 		}
 	}
 
+
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = ClassificationTypes.NewLine)]
+	[Name(nameof(NewLineFormatDef))]
+	//this should be visible to the end user
+	[UserVisible(false)]
+	//set the priority to be after the default classifiers
+	[Order(Before = Priority.Default)]
+	internal sealed class NewLineFormatDef : ClassificationFormatDefinition
+	{
+		public NewLineFormatDef()
+		{
+			DisplayName = "GLSL: NewLine"; //human readable version of the name
+			ForegroundColor = Color.FromRgb(0, 0, 0);
+		}
+	}
 
 
 }
