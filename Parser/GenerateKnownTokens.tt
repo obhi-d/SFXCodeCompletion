@@ -33,7 +33,10 @@ namespace SFXCodeCompletion.Parser
 		private static HashSet<string> GetCommands()
 		{
 			var commands = "<#=read("Commands.txt")#>".Trim().Split();
-			return new HashSet<string>(commands);
+			var types = "<#=read("Types.txt")#>".Trim().Split();
+			var result = new HashSet<string>(commands);
+			result.UnionWith(types);
+			return result;
 		}
 				
 		private static HashSet<string> GetCommandParams()
