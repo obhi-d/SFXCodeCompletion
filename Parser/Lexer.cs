@@ -166,6 +166,7 @@ namespace SFXCodeCompletion.Parser
 
       while (index < input.Length)
       {
+        int lastIndex = index;
         char currentChar = input[index];
 
         switch (currentChar)
@@ -348,6 +349,9 @@ namespace SFXCodeCompletion.Parser
             index++;
             break;
         }
+
+        if (index == lastIndex)
+          index++;
       }
 
       return classificationSpans;
