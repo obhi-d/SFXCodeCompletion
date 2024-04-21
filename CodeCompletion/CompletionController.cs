@@ -34,31 +34,30 @@ namespace SFXCodeCompletion.CodeCompletion
     public void VsTextViewCreated(IVsTextView textViewAdapter)
     {
       IWpfTextView view = AdaptersFactory.GetWpfTextView(textViewAdapter);
+
       Debug.Assert(view != null);
-
-      var filter = new CommandFilter(view, CompletionBroker);
-
-      textViewAdapter.AddCommandFilter(filter, out IOleCommandTarget next);
-      filter.Next = next;
+      view.Properties.GetOrCreateSingletonProperty(
+               () => new CommandFilter(textViewAdapter, view, CompletionBroker));
     }
   }
 
   internal sealed class CommandFilter : IOleCommandTarget
   {
     private ICompletionSession _currentSession;
-
-    public CommandFilter(IWpfTextView textView, ICompletionBroker broker)
+    private IOleCommandTarget _next;
+    public CommandFilter(IVsTextView adapter, IWpfTextView textView, ICompletionBroker broker)
     {
       _currentSession = null;
 
       TextView = textView;
       Broker = broker;
+
+      adapter.AddCommandFilter(this, out _next);
     }
 
     public IWpfTextView TextView { get; private set; }
     public ICompletionBroker Broker { get; private set; }
-    public IOleCommandTarget Next { get; set; }
-
+    
     private char GetTypeChar(IntPtr pvaIn)
     {
       return (char)(ushort)Marshal.GetObjectForNativeVariant(pvaIn);
@@ -81,7 +80,7 @@ namespace SFXCodeCompletion.CodeCompletion
         }
       }
       ThreadHelper.ThrowIfNotOnUIThread();
-      return Next.QueryStatus(pguidCmdGroup, cCmds, prgCmds, pCmdText);
+      return _next.QueryStatus(pguidCmdGroup, cCmds, prgCmds, pCmdText);
     }
 
     public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
@@ -120,7 +119,8 @@ namespace SFXCodeCompletion.CodeCompletion
         }
       }
       ThreadHelper.ThrowIfNotOnUIThread();
-      if (!handled) hresult = Next.Exec(pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
+      if (!handled) 
+        hresult = _next.Exec(pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
 
       if (ErrorHandler.Succeeded(hresult))
       {

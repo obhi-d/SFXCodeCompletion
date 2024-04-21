@@ -227,6 +227,7 @@ namespace SFXCodeCompletion.Parser
                   classificationSpans[last] = new ClassificationSpan(lastType.Span, Convert(SfxTokenType.CommandParam));
                   break;
                 }
+                last--;
               }
             }
             Add(index, 1, SfxTokenType.Operator);

@@ -38,6 +38,7 @@ namespace SFXCodeCompletion.Parser
 			result.UnionWith(types);
 			return result;
 		}
+
 				
 		private static HashSet<string> GetCommandParams()
 		{
