@@ -30,8 +30,6 @@ namespace SFXCodeCompletion.Classification
 
     public IList<ClassificationSpan> CalculateSpans(SnapshotSpan snapshotSpan, bool startInGlsl)
     {
-      var output = new List<ClassificationSpan>();
-      var text = snapshotSpan.GetText();
       return plexer.Tokenize(snapshotSpan.Snapshot, startInGlsl);
     }
 

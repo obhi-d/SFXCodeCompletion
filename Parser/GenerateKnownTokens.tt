@@ -29,7 +29,7 @@ namespace SFXCodeCompletion.Parser
 			return result;
 
 		}
-
+		
 		private static HashSet<string> GetCommands()
 		{
 			var commands = "<#=read("Commands.txt")#>".Trim().Split();
@@ -38,8 +38,7 @@ namespace SFXCodeCompletion.Parser
 			result.UnionWith(types);
 			return result;
 		}
-
-				
+						
 		private static HashSet<string> GetCommandParams()
 		{
 			var commandParams = "<#=read("CommandParams.txt")#>".Trim().Split();

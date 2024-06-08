@@ -15,4 +15,5 @@ cbuffer
 buffer
 draw
 bindcall
-
+record
+global
