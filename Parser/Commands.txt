@@ -42,3 +42,11 @@ u8vec4
 i8vec4
 u16vec4
 i16vec4
+sampler
+texture2D
+sampler1D
+sampler1DArray
+sampler2D
+sampler2DArray
+sampler3D
+sampler_state
