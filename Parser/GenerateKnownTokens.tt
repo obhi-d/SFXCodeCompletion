@@ -29,6 +29,7 @@ namespace SFXCodeCompletion.Parser
 			return result;
 
 		}
+
 		
 		private static HashSet<string> GetCommands()
 		{
@@ -46,3 +47,5 @@ namespace SFXCodeCompletion.Parser
 		}
 	}
 }
+
+
